@@ -1,5 +1,4 @@
 class nginx {
-
   File {
     owner => 'root',
     group => 'root',
@@ -8,12 +7,11 @@ class nginx {
   package { 'nginx':
     ensure => present,
   }
-  file { '/var/www':
+  file { [ '/var/www', '/etc/nginx/conf.d' ]:
     ensure => directory,
-    
   }
   file { '/var/www/index.html':
-    ensure => file
+    ensure => file,
     source => 'puppet:///modules/nginx/index.html',
   }
   file { '/etc/nginx/nginx.conf':
@@ -22,15 +20,11 @@ class nginx {
     require => Package['nginx'],
     notify => Service['nginx'],
   }
-  file { '/etc/nginx/conf.d':
-    ensure => directory,
-   
-  }
   file { '/etc/nginx/conf.d/default.conf':
     ensure => file,
     source => 'puppet:///modules/nginx/default.conf',
-    require => Package['nginx'],
     notify => Service['nginx'],
+    require => Package['nginx'],
   }
   service { 'nginx':
     ensure => running,
