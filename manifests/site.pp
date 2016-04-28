@@ -48,19 +48,17 @@ node default {
   # root => '/var/www/html',
   #}
   
-  include wrappers::epel
-  include wrappers::redis
-  include wrappers::limits
+  
   
   $message = hiera('message', 'DEFAULT MESSAGE')
   notify { 'hostmessage':
     message => $message,
   }
 
-  
+  include role::blog_server
   #include users
-  include skeleton
-  include memcached
+  #include skeleton
+  #include memcached
   
  # if $::osfamily == 'Windows' {
  # Package {
@@ -68,7 +66,7 @@ node default {
  #  }  
  #  }
  # include nginx
-  include users::admins
+ # include users::admins
   
 
   
