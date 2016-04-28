@@ -44,6 +44,10 @@ node default {
   #   class { 'my_class': }
   notify { "Hello, my name is ${::hostname}": }
   
+  class { 'nginx':
+   root => '/var/www/html',
+  }
+  
   $message = hiera('message', 'DEFAULT MESSAGE')
   notify { 'hostmessage':
     message => $message,
