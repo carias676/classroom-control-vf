@@ -44,9 +44,9 @@ node default {
   #   class { 'my_class': }
   notify { "Hello, my name is ${::hostname}": }
   
-  class { 'nginx':
-   root => '/var/www/html',
-  }
+  #class { 'nginx':
+  # root => '/var/www/html',
+  #}
   
   $message = hiera('message', 'DEFAULT MESSAGE')
   notify { 'hostmessage':
@@ -63,8 +63,7 @@ node default {
     provider => chocolatey,
   }  
  }
-  
-  #include nginx
+  include nginx
   include users::admins
   
 
