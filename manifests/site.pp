@@ -64,7 +64,7 @@ node default {
   }  
  }
   
-  include nginx
+  #include nginx
   include users::admins
   
 
