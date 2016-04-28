@@ -44,6 +44,12 @@ node default {
   #   class { 'my_class': }
   notify { "Hello, my name is ${::hostname}": }
   
+  $message = hiera('message', 'DEFAULT MESSAGE')
+  notify { 'hostmessage':
+    message => $message,
+  }
+
+  
   #include users
   include skeleton
   include memcached
@@ -57,9 +63,7 @@ node default {
   include nginx
   include users::admins
   
-  $message = hiera('message')
-    notify { $message: }
-  }
+
   
   if $::virtual != 'physical' {
     $vmname = capitalize($::virtual)
