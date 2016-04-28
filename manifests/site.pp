@@ -58,12 +58,12 @@ node default {
   include skeleton
   include memcached
   
-  if $::osfamily == 'Windows' {
-  Package {
-    provider => chocolatey,
-  }  
- }
-  include nginx
+ # if $::osfamily == 'Windows' {
+ # Package {
+ #    provider => chocolatey,
+ #  }  
+ #  }
+ # include nginx
   include users::admins
   
 
