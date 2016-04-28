@@ -48,6 +48,10 @@ node default {
   # root => '/var/www/html',
   #}
   
+  include wrappers::epel
+  include wrappers::redis
+  include wrappers::limits
+  
   $message = hiera('message', 'DEFAULT MESSAGE')
   notify { 'hostmessage':
     message => $message,
